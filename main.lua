@@ -39,7 +39,7 @@ return {
       },
 
       show_numbers = options.show_numbers == nil and true
-        or options.show_numbers,
+          or options.show_numbers,
 
       show_branch = options.show_branch == nil and true or options.show_branch,
       branch_prefix = options.branch_prefix or "",
@@ -48,45 +48,45 @@ return {
       branch_borders = options.branch_borders or "",
 
       show_remote_branch = options.show_remote_branch == nil and true
-        or options.show_remote_branch,
+          or options.show_remote_branch,
       always_show_remote_branch = options.always_show_remote_branch == nil
           and false
-        or options.always_show_remote_branch,
+          or options.always_show_remote_branch,
       always_show_remote_repo = options.always_show_remote_repo == nil
           and false
-        or options.always_show_remote_repo,
+          or options.always_show_remote_repo,
       remote_branch_prefix = options.remote_branch_prefix or ":",
       remote_branch_color = options.remote_branch_color or "bright magenta",
 
       show_tag = options.show_tag == nil and true or options.show_tag,
       always_show_tag = options.always_show_tag == nil and false
-        or options.always_show_tag,
+          or options.always_show_tag,
       tag_color = options.tag_color or "magenta",
       tag_symbol = options.tag_symbol == nil and "#" or options.tag_symbol,
 
       show_commit = options.show_commit == nil and true or options.show_commit,
       always_show_commit = options.always_show_commit == nil and false
-        or options.always_show_commit,
+          or options.always_show_commit,
       commit_color = options.commit_color or "bright magenta",
       commit_symbol = options.commit_symbol == nil and "@"
-        or options.commit_symbol,
+          or options.commit_symbol,
 
       show_behind_ahead_remote = options.show_behind_ahead_remote == nil
           and true
-        or options.show_behind_ahead_remote,
+          or options.show_behind_ahead_remote,
       behind_remote_color = options.behind_remote_color or "bright magenta",
       behind_remote_symbol = options.behind_remote_symbol or "⇣",
       ahead_remote_color = options.ahead_remote_color or "bright magenta",
       ahead_remote_symbol = options.ahead_remote_symbol or "⇡",
 
       show_stashes = options.show_stashes == nil and true
-        or options.show_stashes,
+          or options.show_stashes,
       stashes_color = options.stashes_color or "bright magenta",
       stashes_symbol = options.stashes_symbol or "$",
 
       show_state = options.show_state == nil and true or options.show_state,
       show_state_prefix = options.show_state_prefix == nil and true
-        or options.show_state_prefix,
+          or options.show_state_prefix,
       state_color = options.state_color or "red",
       state_symbol = options.state_symbol or "~",
 
@@ -95,12 +95,12 @@ return {
       staged_symbol = options.staged_symbol or "+",
 
       show_unstaged = options.show_unstaged == nil and true
-        or options.show_unstaged,
+          or options.show_unstaged,
       unstaged_color = options.unstaged_color or "bright yellow",
       unstaged_symbol = options.unstaged_symbol or "!",
 
       show_untracked = options.show_untracked == nil and true
-        or options.show_untracked,
+          or options.show_untracked,
       untracked_color = options.untracked_color or "bright blue",
       untracked_symbol = options.untracked_symbol or "?",
     }
@@ -122,13 +122,13 @@ return {
         branch_string = left_border .. branch .. right_border
       else
         branch_string = left_border
-          .. config.branch_symbol
-          .. branch
-          .. right_border
+            .. config.branch_symbol
+            .. branch
+            .. right_border
       end
 
       local branch_prefix = config.branch_prefix == "" and ""
-        or config.branch_prefix .. " "
+          or config.branch_prefix .. " "
 
       return ui.Line({
         ui.Span(branch_prefix),
@@ -147,14 +147,14 @@ return {
       end
 
       local show_remote = config.always_show_remote_branch
-        or branch ~= remote_branch
+          or branch ~= remote_branch
       if not show_remote then
         return nil
       end
 
       local remote_branch_label = config.always_show_remote_repo
           and (remote_repo .. "/" .. remote_branch)
-        or remote_branch
+          or remote_branch
 
       return ui.Line({
         ui.Span(config.remote_branch_prefix),
@@ -203,16 +203,16 @@ return {
       local ahead = data.ahead_remote
 
       local behind_label = behind
-        and behind > 0
-        and ui.Span(
-          config.behind_remote_symbol .. (config.show_numbers and behind or "")
-        ):fg(config.behind_remote_color)
+          and behind > 0
+          and ui.Span(
+            config.behind_remote_symbol .. (config.show_numbers and behind or "")
+          ):fg(config.behind_remote_color)
 
       local ahead_label = ahead
-        and ahead > 0
-        and ui.Span(
-          config.ahead_remote_symbol .. (config.show_numbers and ahead or "")
-        ):fg(config.ahead_remote_color)
+          and ahead > 0
+          and ui.Span(
+            config.ahead_remote_symbol .. (config.show_numbers and ahead or "")
+          ):fg(config.ahead_remote_color)
 
       if ahead_label and behind_label then
         return ui.Line({
@@ -254,15 +254,15 @@ return {
           state_label = data.state_prefix
 
           if
-            data.state_prefix == "rebase"
-            and config.show_numbers
-            and data.rebase_done
+              data.state_prefix == "rebase"
+              and config.show_numbers
+              and data.rebase_done
           then
             state_label = state_label
-              .. " "
-              .. data.rebase_done
-              .. "/"
-              .. data.unmerged_count
+                .. " "
+                .. data.rebase_done
+                .. "/"
+                .. data.unmerged_count
           end
 
           state_label = state_label .. " "
@@ -271,7 +271,7 @@ return {
         local unmerged_label = config.show_numbers and data.unmerged_count or ""
 
         return ui.Span(state_label .. config.state_symbol .. unmerged_label)
-          :fg(config.state_color)
+            :fg(config.state_color)
       elseif data.state_prefix == "bisect" then
         return ui.Span("bisect"):fg(config.state_color)
       end
@@ -314,7 +314,7 @@ return {
 
         if config.show_numbers then
           local filtered_unstaged =
-            unstaged:gsub("^[%s]*%b()[\r\n]*", ""):gsub("^[%s]*%b()[\r\n]*", "")
+              unstaged:gsub("^[%s]*%b()[\r\n]*", ""):gsub("^[%s]*%b()[\r\n]*", "")
 
           local unstaged_count = 0
           for line in filtered_unstaged:gmatch("[^\r\n]+") do
@@ -431,7 +431,7 @@ return {
     --- @param status string
     local get_behind_ahead_remote = function(status)
       local diverged_ahead, diverged_behind =
-        status:match("have (%d+) and (%d+) different")
+          status:match("have (%d+) and (%d+) different")
       if diverged_ahead and diverged_behind then
         data.behind_remote = tonumber(diverged_behind)
         data.ahead_remote = tonumber(diverged_ahead)
@@ -446,7 +446,7 @@ return {
 
     --- @param status string
     local get_branch = function(status)
-      data.branch = status:match("On branch (%S+)")
+      data.branch = status:gsub("%s+$", "")
     end
 
     --- @param status string
@@ -460,7 +460,7 @@ return {
 
       if unmerged then
         local filtered_unmerged =
-          unmerged:gsub("^[%s]*%b()[%s]*", ""):gsub("^[%s]*%b()[%s]*", "")
+            unmerged:gsub("^[%s]*%b()[%s]*", ""):gsub("^[%s]*%b()[%s]*", "")
 
         local count = 0
         for line in filtered_unmerged:gmatch("[^\r\n]+") do
@@ -494,7 +494,7 @@ return {
     --- @param status string
     local get_unstaged = function(status)
       data.unstaged =
-        status:match("Changes not staged for commit:%s*(.-)%s*\n\n")
+          status:match("Changes not staged for commit:%s*(.-)%s*\n\n")
     end
 
     --- @param status string
@@ -504,49 +504,46 @@ return {
 
     local get_status = function()
       local cmd = Command("git")
-        :arg({
-          "status",
-          "--ignore-submodules=dirty",
-          "--branch",
-          "--show-stash",
-          "--ahead-behind",
-        })
-        :cwd(args[1])
-        :env("LANGUAGE", "en_US.UTF-8")
-        :stdout(Command.PIPED)
+          :arg({
+            "branch",
+            "--show-current",
+          })
+          :cwd(args[1])
+          :env("LANGUAGE", "en_US.UTF-8")
+          :stdout(Command.PIPED)
       local cmd_output = cmd:output()
 
       if cmd_output then
         local status = cmd_output.stdout
 
         get_branch(status)
-        get_behind_ahead_remote(status)
-        get_stashes(status)
-        get_state(status)
-        get_staged(status)
-        get_unstaged(status)
-        get_untracked(status)
+        -- get_behind_ahead_remote(status)
+        -- get_stashes(status)
+        -- get_state(status)
+        -- get_staged(status)
+        -- get_unstaged(status)
+        -- get_untracked(status)
       end
     end
 
     local get_remote_branch = function()
       local cmd = Command("git")
-        :arg({
-          "rev-parse",
-          "--abbrev-ref",
-          "--symbolic-full-name",
-          "@{upstream}",
-        })
-        :cwd(args[1])
-        :env("LANGUAGE", "en_US.UTF-8")
-        :stdout(Command.PIPED)
+          :arg({
+            "rev-parse",
+            "--abbrev-ref",
+            "--symbolic-full-name",
+            "@{upstream}",
+          })
+          :cwd(args[1])
+          :env("LANGUAGE", "en_US.UTF-8")
+          :stdout(Command.PIPED)
       local cmd_output = cmd:output()
 
       if cmd_output then
         local remote_branch = cmd_output.stdout
 
         data.remote_branch =
-          remote_branch:gsub("[\r\n]", ""):match("^[^/]+/(.+)")
+            remote_branch:gsub("[\r\n]", ""):match("^[^/]+/(.+)")
         data.remote_repo = remote_branch:gsub("[\r\n]", ""):match("^([^/]+)/")
       end
     end
@@ -563,10 +560,10 @@ return {
 
     local get_git_log = function()
       local cmd = Command("git")
-        :arg({ "log", "--format=commit %h%d", "-n", "1" })
-        :cwd(args[1])
-        :env("LANGUAGE", "en_US.UTF-8")
-        :stdout(Command.PIPED)
+          :arg({ "log", "--format=commit %h%d", "-n", "1" })
+          :cwd(args[1])
+          :env("LANGUAGE", "en_US.UTF-8")
+          :stdout(Command.PIPED)
       local cmd_output = cmd:output()
 
       if cmd_output then
@@ -578,8 +575,8 @@ return {
     end
 
     get_status()
-    get_remote_branch()
-    get_git_log()
+    -- get_remote_branch()
+    -- get_git_log()
 
     save(args[1], data)
   end,
