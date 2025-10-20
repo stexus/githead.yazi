@@ -50,7 +50,7 @@ return {
     }
 
     function Header:get_branch(status)
-      local branch = status:match("On branch (%S+)")
+      local branch = status:gsub("%s+$", "")
 
       if branch == nil then
         local commit = status:match("onto (%S+)") or status:match("detached at (%S+)")
@@ -218,21 +218,21 @@ return {
       end
 
       local branch = config.show_branch and self:get_branch(status) or ""
-      local behind_ahead = config.show_behind_ahead and self:get_behind_ahead(status) or ""
-      local stashes = config.show_stashes and self:get_stashes(status) or ""
-      local state = config.show_state and self:get_state(status) or ""
-      local staged = config.show_staged and self:get_staged(status) or ""
-      local unstaged = config.show_unstaged and self:get_unstaged(status) or ""
-      local untracked = config.show_untracked and self:get_untracked(status) or ""
+      -- local behind_ahead = config.show_behind_ahead and self:get_behind_ahead(status) or ""
+      -- local stashes = config.show_stashes and self:get_stashes(status) or ""
+      -- local state = config.show_state and self:get_state(status) or ""
+      -- local staged = config.show_staged and self:get_staged(status) or ""
+      -- local unstaged = config.show_unstaged and self:get_unstaged(status) or ""
+      -- local untracked = config.show_untracked and self:get_untracked(status) or ""
 
       return ui.Line({
         branch,
-        behind_ahead,
-        stashes,
-        state,
-        staged,
-        unstaged,
-        untracked,
+        -- behind_ahead,
+        -- stashes,
+        -- state,
+        -- staged,
+        -- unstaged,
+        -- untracked,
       })
     end
 
@@ -258,7 +258,7 @@ return {
   entry = function(_, job)
     local args = job.args or job
     local command = Command("git")
-        :arg({ "status", "--ignore-submodules=dirty", "--branch", "--show-stash", "--ahead-behind" })
+        :arg({"branch", "--show-current"})
         :cwd(args[1])
         :env("LANGUAGE", "en_US.UTF-8")
         :stdout(Command.PIPED)
